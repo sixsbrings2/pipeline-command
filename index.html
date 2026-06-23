@@ -423,8 +423,7 @@ header.top{display:flex;align-items:flex-start;justify-content:space-between;gap
 // ─── CONSTANTS ───────────────────────────────
 const STORE='pco-v4';
 const MODEL='claude-sonnet-4-6';
-const RESULTS_URL='https://api.github.com/repos/sixsbrings2/pipeline-command/contents/results.json';
-const GITHUB_TOKEN='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';
+const RESULTS_URL='https://raw.githubusercontent.com/sixsbrings2/pipeline-command/main/results.json';
 const NOTION_PARENT='2ec57115-0423-4980-b2da-b0c20febbd19';
 
 const MASTER_RESUME=`TRAVIS  | Charlotte / Lake Norman, NC | SAFe 6 Agilist · CSPO · CSM | BS Actuarial Science + CS Minor, Univ. of Pittsburgh
@@ -591,7 +590,7 @@ async function importResults(){
   const btn=$('#importBtn');
   btn.innerHTML='<span class="spin"></span> Fetching&hellip;';btn.disabled=true;
   try{
-    const res=await fetch(RESULTS_URL,{headers:{'Authorization':'token '+GITHUB_TOKEN,'Accept':'application/vnd.github.v3.raw'}});
+    const res=await fetch(RESULTS_URL+'?t='+Date.now());
     if(!res.ok)throw new Error('HTTP '+res.status);
     importData=await res.json();
     showImportBar(importData);
