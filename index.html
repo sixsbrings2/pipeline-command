@@ -252,7 +252,7 @@ header.top{display:flex;align-items:flex-start;justify-content:space-between;gap
 <body>
 <div class="wrap">
 <header class="top">
-  <div class="brand"><div class="logo" aria-hidden="true"></div><div><h1>Pipeline Command</h1><div class="sub">Job Search Agent &mdash; Travis Witsch</div></div></div>
+  <div class="brand"><div class="logo" aria-hidden="true"></div><div><h1>Pipeline Command</h1><div class="sub">Job Search Agent &mdash; Travis</div></div></div>
   <div class="controls">
     <button class="btn import-btn" id="importBtn">&#8595; Import results</button>
     <button class="btn ghost" id="rubricBtn">&#9881; Rubric</button>
@@ -427,7 +427,7 @@ const RESULTS_URL='https://api.github.com/repos/sixsbrings2/pipeline-command/con
 const GITHUB_TOKEN='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';
 const NOTION_PARENT='2ec57115-0423-4980-b2da-b0c20febbd19';
 
-const MASTER_RESUME=`TRAVIS WITSCH | Charlotte / Lake Norman, NC | SAFe 6 Agilist · CSPO · CSM | BS Actuarial Science + CS Minor, Univ. of Pittsburgh
+const MASTER_RESUME=`TRAVIS | Charlotte, NC | SAFe 6 Agilist · CSPO · CSM | BS Actuarial Science + CS Minor, Univ. of Pittsburgh
 
 SUMMARY
 Senior product executive with extensive fintech, financial services, and travel-tech experience. Known for taking broken or underbuilt platforms and turning them into commercial-grade systems measurably. Deep in payments, data/BI, trading/brokerage, digital transformation, mobile, and API platforms. Equally fluent in 3-year strategy and next-sprint execution.
@@ -685,7 +685,7 @@ function addImportedRole(r){
 async function scoreJob(job,silent){
   const card=document.querySelector(`[data-id="${job.id}"] .score-side`);
   if(card&&!silent)card.innerHTML='<span class="unscored"><span class="spin"></span></span>';
-  const prompt=`Score this job for a senior fintech PM.\nRUBRIC:\n${state.rubric}\nCANDIDATE: Travis Witsch — 20+ yrs PM, Schwab/Spirit/Truist; Charlotte/remote; $180K+ floor; expert in payments/data/trading/digital transformation.\nROLE: ${job.title} @ ${job.company}. Comp: ${job.comp||'?'}. Loc: ${job.loc||'?'}. JD: ${job.jd||''}\nReturn ONLY JSON: {"score":<0-100>,"tier":"<Strong match|Good match|Marginal|Skip>","rationale":"<max 20 words>","flags":["..."]}`;
+  const prompt=`Score this job for a senior fintech PM.\nRUBRIC:\n${state.rubric}\nCANDIDATE: Travis — 30+ yrs PM, Schwab/Spirit/Truist; Charlotte/remote; $180K+ floor; expert in payments/data/trading/digital transformation.\nROLE: ${job.title} @ ${job.company}. Comp: ${job.comp||'?'}. Loc: ${job.loc||'?'}. JD: ${job.jd||''}\nReturn ONLY JSON: {"score":<0-100>,"tier":"<Strong match|Good match|Marginal|Skip>","rationale":"<max 20 words>","flags":["..."]}`;
   try{
     const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:MODEL,max_tokens:400,messages:[{role:'user',content:prompt}]})});
     const data=await res.json();
@@ -1085,7 +1085,7 @@ async function generateEmail(job,type){
   const labels={followup:'7-day follow-up',thankyou:'thank-you after interview',checkin:'general check-in',withdraw:'polite withdrawal'};
   const ctx=job.log.slice(0,3).map(e=>e.txt).join('; ');
   const prompt=`Draft a ${labels[type]} email for a senior product leader job search.
-CANDIDATE: Travis Witsch — VP/Director PM, fintech/financial-services/travel-tech
+CANDIDATE: Travis — VP/Director PM, fintech/financial-services/travel-tech
 ROLE: ${job.title} @ ${job.company}
 CONTACT: ${contact||'(not specified)'}
 DAYS SINCE APPLIED: ${days??'unknown'}
